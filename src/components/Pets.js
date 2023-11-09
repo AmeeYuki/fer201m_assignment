@@ -4,9 +4,11 @@ import PetList from "./PetList";
 
 export default function Pets() {
   return (
-    <div className="mt-2">
+    <div className="mt-4">
       <Container>
-        <Typography variant="h4"> Pet List</Typography>
+        <Typography variant="h5">
+          <b> Pet List</b>
+        </Typography>
         <hr />
         <PetList></PetList>
       </Container>
