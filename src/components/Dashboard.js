@@ -76,7 +76,10 @@ export default function Dashboard() {
       <Grid className="mt-3 mb-3" textAlign={"end"}>
         <Button variant="solid" size="lg" color="primary">
           <Typography level="body-lg">
-            <Link to={"#"} style={{ textDecoration: "none", color: "white" }}>
+            <Link
+              to={"/addPet"}
+              style={{ textDecoration: "none", color: "white" }}
+            >
               Add new pet <KeyboardReturnIcon />
             </Link>
           </Typography>
@@ -169,14 +172,12 @@ export default function Dashboard() {
                   <td>{pet.status}</td>
                   <td>
                     <Box sx={{ display: "flex", gap: 1 }}>
-                      <Button
-                        size="sm"
-                        variant="solid"
-                        color="neutral"
-                        // onClick={() => handleEditClick(pet)}
-                      >
-                        Edit
-                      </Button>
+                      <Link to={`/updatePet/${pet.id}`}>
+                        <Button size="sm" variant="solid" color="neutral">
+                          Edit
+                        </Button>
+                      </Link>
+
                       <Button
                         size="sm"
                         variant="solid"
