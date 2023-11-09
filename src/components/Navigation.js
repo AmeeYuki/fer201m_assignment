@@ -169,7 +169,7 @@ export default function Navigation(props) {
                   }}
                 >
                   {pages.map((page) => (
-                    <Link to={page === "Home" ? "/" : page}>
+                    <Link to={page === "Pets" ? "/" : page}>
                       <MenuItem key={page} onClick={handleCloseNavMenu}>
                         <Typography textAlign="center">{page}</Typography>
                       </MenuItem>
@@ -198,7 +198,7 @@ export default function Navigation(props) {
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                 {pages.map((page) => (
-                  <Link to={page === "Home" ? "/" : page}>
+                  <Link to={page === "Pets" ? "/" : page}>
                     <Button
                       key={page}
                       onClick={handleCloseNavMenu}

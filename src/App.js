@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import Pets from "./components/Pets";
 import Dashboard from "./components/Dashboard";
 import Blog from "./components/Blog";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/blog" element={<Blog />}></Route>
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }
