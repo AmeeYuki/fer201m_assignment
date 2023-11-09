@@ -4,13 +4,25 @@ import Button from "@mui/joy/Button";
 import Table from "@mui/joy/Table";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
-import { Avatar, Container, Grid, Stack } from "@mui/material";
+import {
+  Avatar,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+  Stack,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import axios from "axios";
 
 export default function Dashboard() {
   const [APIData, setAPIData] = React.useState([]);
+  const [selectedPet, setSelectedPet] = React.useState(null);
+  const [openDialog, setOpenDialog] = React.useState(false);
   const petURL = "https://65450ed15a0b4b04436d8d79.mockapi.io/animalManagement";
 
   React.useEffect(() => {
@@ -22,6 +34,28 @@ export default function Dashboard() {
       })
       .catch((error) => console.log(error.message));
   }, []);
+
+  const handleDeleteClick = (pet) => {
+    setSelectedPet(pet);
+    setOpenDialog(true);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (selectedPet) {
+      // Make a DELETE request to your API to delete the selected pet
+      axios
+        .delete(`${petURL}/${selectedPet.id}`)
+        .then(() => {
+          // Remove the deleted pet from the state
+          setAPIData((prevData) =>
+            prevData.filter((pet) => pet.id !== selectedPet.id)
+          );
+          setSelectedPet(null);
+        })
+        .catch((error) => console.log(error.message));
+    }
+    setOpenDialog(false);
+  };
 
   return (
     <Container className="mt-4">
@@ -135,10 +169,20 @@ export default function Dashboard() {
                   <td>{pet.status}</td>
                   <td>
                     <Box sx={{ display: "flex", gap: 1 }}>
-                      <Button size="sm" variant="solid" color="neutral">
+                      <Button
+                        size="sm"
+                        variant="solid"
+                        color="neutral"
+                        // onClick={() => handleEditClick(pet)}
+                      >
                         Edit
                       </Button>
-                      <Button size="sm" variant="solid" color="danger">
+                      <Button
+                        size="sm"
+                        variant="solid"
+                        color="danger"
+                        onClick={() => handleDeleteClick(pet)}
+                      >
                         Delete
                       </Button>
                     </Box>
@@ -149,6 +193,24 @@ export default function Dashboard() {
           </Table>
         </Sheet>
       </Box>
+
+      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+        <DialogTitle>Delete Pet</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete{" "}
+            {selectedPet ? selectedPet.petName : ""}?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDialog(false)} color="neutral">
+            Cancel
+          </Button>
+          <Button onClick={handleDeleteConfirm} color="danger">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
