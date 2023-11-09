@@ -19,6 +19,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Slide } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -168,9 +169,11 @@ export default function Navigation(props) {
                   }}
                 >
                   {pages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{page}</Typography>
-                    </MenuItem>
+                    <Link to={page === "Home" ? "/" : page}>
+                      <MenuItem key={page} onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center">{page}</Typography>
+                      </MenuItem>
+                    </Link>
                   ))}
                 </Menu>
               </Box>
@@ -195,13 +198,15 @@ export default function Navigation(props) {
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                 {pages.map((page) => (
-                  <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                  >
-                    {page}
-                  </Button>
+                  <Link to={page === "Home" ? "/" : page}>
+                    <Button
+                      key={page}
+                      onClick={handleCloseNavMenu}
+                      sx={{ my: 2, color: "white", display: "block" }}
+                    >
+                      {page}
+                    </Button>
+                  </Link>
                 ))}
               </Box>
 
@@ -242,7 +247,7 @@ export default function Navigation(props) {
         </AppBar>
       </HideOnScroll>
       <Toolbar id="back-to-top-anchor" />
-      <Container>
+      {/* <Container>
         <Box sx={{ my: 2 }}>
           {[...new Array(20)]
             .map(
@@ -253,7 +258,7 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
             )
             .join("\n")}
         </Box>
-      </Container>
+      </Container> */}
       <ScrollTop {...props}>
         <Fab size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
