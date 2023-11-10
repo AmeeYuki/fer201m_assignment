@@ -18,9 +18,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Slide } from "@mui/material";
+import { Grid, Slide, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
-
+import PetsIcon from "@mui/icons-material/Pets";
+import LoginGG from "./LoginGG";
 function ScrollTop(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -91,8 +92,7 @@ HideOnScroll.propTypes = {
   window: PropTypes.func,
 };
 
-const pages = ["Pets", "Dashboard", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Home", "Blog", "Contact"];
 
 export default function Navigation(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -120,24 +120,40 @@ export default function Navigation(props) {
         <AppBar>
           <Container maxWidth="xl">
             <Toolbar disableGutters>
-              <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="#app-bar-with-responsive-menu"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                LOGO
-              </Typography>
+              <Link to={"/"}>
+                <Stack
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  spacing={0}
+                >
+                  <PetsIcon
+                    sx={{
+                      display: { xs: "none", md: "flex" },
+                      mr: 1,
+                      color: "white",
+                    }}
+                  />
+                  <Typography
+                    variant="subtitle2"
+                    noWrap
+                    component="a"
+                    href="#app-bar-with-responsive-menu"
+                    sx={{
+                      paddingLeft: 3,
+                      mr: 2,
+                      display: { xs: "none", md: "flex" },
+                      fontFamily: "monospace",
+                      fontWeight: 700,
+                      letterSpacing: ".3rem",
+                      color: "white",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Pets Shop
+                  </Typography>
+                </Stack>
+              </Link>
 
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                 <IconButton
@@ -169,7 +185,7 @@ export default function Navigation(props) {
                   }}
                 >
                   {pages.map((page) => (
-                    <Link to={page === "Pets" ? "/" : page}>
+                    <Link to={page === "Home" ? "/" : page}>
                       <MenuItem key={page} onClick={handleCloseNavMenu}>
                         <Typography textAlign="center">{page}</Typography>
                       </MenuItem>
@@ -177,7 +193,7 @@ export default function Navigation(props) {
                   ))}
                 </Menu>
               </Box>
-              <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+              <PetsIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
               <Typography
                 variant="h5"
                 noWrap
@@ -194,11 +210,11 @@ export default function Navigation(props) {
                   textDecoration: "none",
                 }}
               >
-                LOGO
+                Pets Shop
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                 {pages.map((page) => (
-                  <Link to={page === "Pets" ? "/" : page}>
+                  <Link to={page === "Home" ? "/" : page}>
                     <Button
                       key={page}
                       onClick={handleCloseNavMenu}
@@ -211,7 +227,8 @@ export default function Navigation(props) {
               </Box>
 
               <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
+                <LoginGG></LoginGG>
+                {/* <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
                       alt="Remy Sharp"
@@ -240,7 +257,7 @@ export default function Navigation(props) {
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                   ))}
-                </Menu>
+                </Menu> */}
               </Box>
             </Toolbar>
           </Container>

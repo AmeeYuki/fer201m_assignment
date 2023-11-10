@@ -2,7 +2,7 @@ import { Container, Divider, Typography } from "@mui/material";
 import React, { Component } from "react";
 import PetList from "./PetList";
 
-export default function Pets() {
+export default function Home() {
   return (
     <div className="mt-4">
       <Container>
